@@ -23,7 +23,7 @@ func _physics_process(delta):
 	velocity.x = 0  # Reseta o movimento horizontal
 	if Input.is_action_pressed("ui_right"):  # Movimenta para a direita
 		velocity.x += SPEED
-		sprite.flip_h = true  # Garante que o sprite está voltado para a direita
+		sprite.flip_h = false  # Garante que o sprite está voltado para a direita
 	elif Input.is_action_pressed("ui_left"):  # Movimenta para a esquerda
 		velocity.x -= SPEED
 		sprite.flip_h = true  # Garante que o sprite está voltado para a esquerda
