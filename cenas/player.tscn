@@ -588,6 +588,5 @@ shape = SubResource("RectangleShape2D_mfdus")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5hxbv")
-animation = &"jump"
-frame_progress = 0.574498
+animation = &"walk"
 flip_h = true

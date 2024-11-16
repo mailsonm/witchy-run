@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dvyv0kulojjvp"]
+[gd_scene load_steps=11 format=3 uid="uid://dvyv0kulojjvp"]
 
 [ext_resource type="PackedScene" path="res://cenas/BG2.tscn" id="1_2nnyj"]
 [ext_resource type="Texture2D" uid="uid://cah0rxfvrmpc6" path="res://Assets/Tileset/Tiles.png" id="1_coblg"]
+[ext_resource type="PackedScene" uid="uid://b6wmsbegdhnbf" path="res://cenas/gotinha.tscn" id="2_03v4g"]
 [ext_resource type="PackedScene" uid="uid://cjsy87f140jyx" path="res://cenas/player.tscn" id="2_xd0yp"]
 [ext_resource type="FontFile" uid="uid://d4ltk3ekt8ehy" path="res://Assets/Fontes/Montserrat-Black.ttf" id="3_kworu"]
 [ext_resource type="PackedScene" uid="uid://bqlsxwqjqn6iu" path="res://cenas/item.tscn" id="4_silb6"]
@@ -520,6 +521,9 @@ shadow_color = Color(0, 0, 0, 0.827451)
 [node name="BG2" parent="." instance=ExtResource("1_2nnyj")]
 layer = -1
 
+[node name="gotinha" parent="." instance=ExtResource("2_03v4g")]
+position = Vector2(1775, 650)
+
 [node name="TileMap" type="TileMap" parent="."]
 visible = false
 tile_set = SubResource("TileSet_6lfqx")
@@ -530,7 +534,7 @@ layer_0/tile_data = PackedInt32Array(2621441, 65536, 0, 2686977, 65536, 1, 27525
 position = Vector2(70, 502)
 
 [node name="Item" parent="." instance=ExtResource("4_silb6")]
-position = Vector2(1425, 582)
+position = Vector2(1553, 592)
 scale = Vector2(0.5, 0.5)
 
 [node name="Hud" type="CanvasLayer" parent="."]

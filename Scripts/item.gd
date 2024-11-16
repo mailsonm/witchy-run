@@ -1,57 +1,59 @@
 extends Area2D
 
-# Variáveis para controle de posição e movimento do item
-var speed = 200  # Velocidade do movimento do item (unidades por segundo)
-var min_y = 300  # Posição mínima no eixo Y (limite inferior da movimentação)
-var max_y = 650  # Posição máxima no eixo Y (limite superior da movimentação)
-var start_position = Vector2(1300, 0)  # Posição inicial do item no eixo X (fora da tela) e Y aleatório
-var respawn_time = 3.0  # Tempo para respawn (em segundos)
+# Configurações do item
+const SPEED = 200  # Velocidade de movimento do item (unidades por segundo)
+const START_X = 1350  # Posição inicial no eixo X (fora da tela)
+const END_X = -100  # Posição onde o item desaparece
+const MIN_Y = 300  # Posição mínima no eixo Y (limite inferior da movimentação)
+const MAX_Y = 650  # Posição máxima no eixo Y (limite superior da movimentação)
 
-# Referência ao recurso do item (a cena do item que será instanciada)
-var item_scene = preload("res://cenas/item.tscn")
+# Referências aos nós filhos
+@onready var sprite = $Sprite2D
+@onready var collision = $CollisionShape2D
 
-# Função chamada quando a cena é inicializada
+# Temporizador para respawn
+@onready var timer = Timer.new()
+
 func _ready():
-	# Define a posição inicial do item com um Y aleatório dentro do intervalo definido
-	position = start_position
-	position.y = randf_range(min_y, max_y)  # Aleatoriza a posição Y com randf_range
+	# Configura posição inicial com altura aleatória
+	position = Vector2(START_X, randf_range(MIN_Y, MAX_Y))
 
-	# Inicia o processamento do item (movimento)
-	set_process(true)
+	# Configura o temporizador
+	timer.one_shot = true
+	timer.connect("timeout", Callable(self, "_respawn"))
+	add_child(timer)  # Adiciona o temporizador ao nó atual
 
-# Função chamada a cada frame, usada para mover o item
 func _process(delta):
-	# Move o item para a esquerda (reduz a posição X)
-	position.x -= speed * delta
+	# Move o item para a esquerda
+	position.x -= SPEED * delta
 
-	# Quando o item sai da tela (posição X < -100), ele desaparece
-	if position.x < -100:
-		coletado()  # Chama a função para respawn ou remoção do item
+	# Verifica se o item saiu da tela
+	if position.x < END_X:
+		desaparece()
 
-# Função chamada quando o item colide com o jogador (Player)
-func _on_body_entered(body:):
-	if body.name == "Player":  # Verifica se o corpo que colidiu é o jogador
-		body.coletaMoeda()  # Chama a função de coleta de moeda do jogador
-		coletado()  # Chama a função para respawn ou remoção do item
+func _on_body_entered(body: Node):
+	# Verifica se colidiu com o jogador
+	if sprite.visible and body.name == "Player":  # Só coleta se o item estiver visível
+		body.coletaMoeda()  # Chama a função do jogador para adicionar pontos
+		desaparece()
 
-# Função chamada quando o item é coletado ou sai da tela
-func coletado():
-	# Remove o item da cena
-	queue_free()
-	
-	# Cria um timer para aguardar o respawn do item
-	var timer = Timer.new()
-	timer.wait_time = respawn_time  # Define o tempo de respawn
-	timer.one_shot = true  # Configura o timer para rodar apenas uma vez
-	timer.connect("timeout", Callable(self, "_respawn"))  # Conecta o sinal de timeout do timer com a função de respawn
-	get_parent().add_child(timer)  # Adiciona o timer à cena
+func desaparece():
+	# Desativa o movimento, sprite, colisão e o próprio Area2D
+	set_process(false)
+	sprite.visible = false
+	collision.disabled = true
+	monitoring = false  # Desativa o monitoramento de colisões
 
-# Função chamada quando o timer expira, para realizar o respawn
+	# Define o tempo de reaparecimento aleatório (5, 10 ou 15 segundos)
+	timer.wait_time = randi_range(5, 15)
+	timer.start()
+
 func _respawn():
-	# Instancia o novo item a partir da cena pré-carregada
-	var novo_item = item_scene.instantiate()  # Método correto para instanciar no Godot 4
-	get_parent().add_child(novo_item)  # Adiciona o novo item à cena
+	# Reposiciona o item na posição inicial com altura aleatória
+	position = Vector2(START_X, randf_range(MIN_Y, MAX_Y))
 
-	# Define a posição inicial do novo item
-	novo_item.position = start_position
-	novo_item.position.y = randf_range(min_y, max_y)  # Define a posição Y aleatória dentro do intervalo
+	# Reativa o sprite, colisão, movimento e monitoramento de colisões
+	sprite.visible = true
+	collision.disabled = false
+	monitoring = true  # Reativa o monitoramento de colisões
+	set_process(true)

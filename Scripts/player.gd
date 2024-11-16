@@ -26,7 +26,7 @@ func _physics_process(delta):
 		sprite.flip_h = true  # Garante que o sprite está voltado para a direita
 	elif Input.is_action_pressed("ui_left"):  # Movimenta para a esquerda
 		velocity.x -= SPEED
-		sprite.flip_h = false  # Garante que o sprite está voltado para a esquerda
+		sprite.flip_h = true  # Garante que o sprite está voltado para a esquerda
 
 	# Controle de pulo e pulo duplo
 	if Input.is_action_just_pressed("ui_accept"):
