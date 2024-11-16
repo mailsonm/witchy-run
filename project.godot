@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Witchy-Run"
+run/main_scene="res://cenas/level.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -22,6 +23,17 @@ window/size/viewport_height=720
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
+
+[layer_names]
+
+2d_render/layer_1="Player"
+2d_render/layer_2="Chao"
+2d_render/layer_3="Obstaculo"
+2d_render/layer_4="Itens"
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Chao"
+2d_physics/layer_3="Obstaculo"
+2d_physics/layer_4="Itens"
 
 [rendering]
 

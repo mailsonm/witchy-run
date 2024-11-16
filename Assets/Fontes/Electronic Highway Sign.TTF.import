@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bihtja5xljj53"
-path="res://.godot/imported/fonteTelaInicial.otf-e2e8a5bee0a2211232568d143da77595.fontdata"
+uid="uid://fr0f54kdtpk7"
+path="res://.godot/imported/Electronic Highway Sign.TTF-0bd6fac0fa355adb6edc62359ceb74ba.fontdata"
 
 [deps]
 
-source_file="res://Assets/assets/fonteTelaInicial.otf"
-dest_files=["res://.godot/imported/fonteTelaInicial.otf-e2e8a5bee0a2211232568d143da77595.fontdata"]
+source_file="res://Assets/Fontes/Electronic Highway Sign.TTF"
+dest_files=["res://.godot/imported/Electronic Highway Sign.TTF-0bd6fac0fa355adb6edc62359ceb74ba.fontdata"]
 
 [params]
 

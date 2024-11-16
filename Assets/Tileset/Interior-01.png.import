@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qu1eplg1nkto"
-path="res://.godot/imported/coracao.png-192ab4d0f9c50706d7afc3afa7a16e91.ctex"
+uid="uid://dgx4lavcxqb0g"
+path="res://.godot/imported/Interior-01.png-c3b2706ccb41bc1fd0efd7f3691dd295.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/assets/coracao.png"
-dest_files=["res://.godot/imported/coracao.png-192ab4d0f9c50706d7afc3afa7a16e91.ctex"]
+source_file="res://Assets/Tileset/Interior-01.png"
+dest_files=["res://.godot/imported/Interior-01.png-c3b2706ccb41bc1fd0efd7f3691dd295.ctex"]
 
 [params]
 
