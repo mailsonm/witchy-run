@@ -12,6 +12,8 @@ const JUMP_VELOCITY = 400.0  # Força do pulo
 var gravity = 980  # Força de gravidade aplicada ao personagem
 var pontuacao: int = 0  # Pontuação do jogador
 var can_double_jump = false  # Controle para permitir pulo duplo
+var vidas: int = 3  # Vidas iniciais do jogador
+var is_invincible = false  # Controle de invencibilidade temporária
 
 # Função que controla a física do personagem
 func _physics_process(delta):
@@ -49,4 +51,25 @@ func _physics_process(delta):
 # Função para coletar moeda e atualizar pontuação
 func coletaMoeda():
 	pontuacao += 1  # Incrementa a pontuação
-	hud.text = "Pontuação: %d" % pontuacao  # Atualiza o HUD com a nova pontuação
+	if hud:
+		hud.text = "Pontuação: %d" % pontuacao  # Atualiza o HUD com a nova pontuação
+
+# Função para receber dano de inimigos
+func recebe_dano():
+	if is_invincible:
+		return
+
+	vidas -= 1
+	is_invincible = true
+	
+	# Efeito visual de piscar e temporizador de invencibilidade
+	if sprite:
+		sprite.modulate.a = 0.5
+	
+	await get_tree().create_timer(1.0).timeout
+	is_invincible = false
+	if sprite:
+		sprite.modulate.a = 1.0
+
+	if vidas <= 0:
+		get_tree().reload_current_scene()
