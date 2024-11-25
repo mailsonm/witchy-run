@@ -33,9 +33,9 @@ func _physics_process(delta):
 		desaparece()
 
 func _on_body_entered(body: Node):
-	# Verifica se colidiu com o Player
-	if body.name == "Player":
-		body.recebe_dano()  # Chama um método no Player
+	# Verifica se colidiu com o Player e chama o método de forma segura
+	if body.has_method("recebe_dano"):
+		body.recebe_dano()
 		
 func desaparece():
 	# Pausa o movimento enquanto a gotinha aguarda para reaparecer
